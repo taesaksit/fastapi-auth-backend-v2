@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from database import Base, engine
-from utils import exception_handlers
+from core import exception_handlers
 from routes import auth, user
 
 app = FastAPI()
