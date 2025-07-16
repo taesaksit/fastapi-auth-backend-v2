@@ -40,9 +40,9 @@ def login(db: Session, user: schemasUser.Login):
             detail="email or password incorrect",
         )
 
-    user_response = {"sub": db_user.email, "id": db_user.id, "name": db_user.name}
+    payload = {"sub": db_user.email, "id": db_user.id, "name": db_user.name}
+    token = create_access_token(data=payload)
 
-    token = create_access_token(data={**user_response})
     return ResponseSchema(
         status="success",
         message="Login successfully",

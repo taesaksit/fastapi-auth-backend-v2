@@ -7,7 +7,8 @@ from models.user import User
 from repository.user import get_user_by_email
 from core.security import SECRET_KEY, ALGORITHM
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login")
+# สร้าง instance ที่ใช้สำหรับ extract JWT Token จาก header
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/auth/login")
 
 
 def get_current_user(
@@ -31,8 +32,7 @@ def get_current_user(
 
     user = get_user_by_email(db, email)
 
-    #  เหตุผลที่ต้องเช็ค if user is None
-    # 1.Token อาจเป็นของ user ที่ถูกลบไปแล้ว
+    #  เหตุผลที่ต้องเช็ค if user is None เพราะ Token อาจเป็นของ user ที่ถูกลบไปแล้ว
     if user is None:
         raise credentials_exception
     return user

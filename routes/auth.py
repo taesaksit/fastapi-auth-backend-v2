@@ -17,3 +17,4 @@ def register(user: schemasUser.Register, db: Session = Depends(get_db)):
 @router.post("/login", response_model=ResponseSchema[schemasUser.LoginOut])
 def login(user: schemasUser.Login, db: Session = Depends(get_db)):
     return auth_repo.login(db, user)
+
